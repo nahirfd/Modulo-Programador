@@ -1,31 +1,43 @@
 class AspiradoraRobot:
     def __init__(self, capacidad_polvo=100):
-        self.capacidad_polvo = capacidad_polvo
-        self.polvo_recogido = 0
-        self.encendida = False
+        self.__capacidad_polvo = capacidad_polvo
+        self.__polvo_recogido = 0
+        self.__encendida = False
+
+    @property
+    def capacidad_polvo(self):
+        return self.__capacidad_polvo
+
+    @property
+    def polvo_recogido(self):
+        return self.__polvo_recogido
+
+    @property
+    def encendida(self):
+        return self.__encendida
 
     def encender(self):
-        self.encendida = True
+        self.__encendida = True
         print("La aspiradora está encendida.")
 
     def recoger_polvo(self, cantidad=10):
-        if self.encendida:
-            if self.polvo_recogido + cantidad <= self.capacidad_polvo:
-                self.polvo_recogido += cantidad
-                print(f"Recogidos {cantidad} gramos de polvo. Polvo recogido total: {self.polvo_recogido}g")
+        if self.__encendida:
+            if self.__polvo_recogido + cantidad <= self.__capacidad_polvo:
+                self.__polvo_recogido += cantidad
+                print(f"Recogidos {cantidad} gramos de polvo. Polvo recogido total: {self.__polvo_recogido}g")
             else:
                 print("El contenedor de polvo está lleno. Vacíalo antes de continuar.")
         else:
             print("La aspiradora está apagada. No puede recoger polvo.")
 
     def apagar(self):
-        self.encendida = False
+        self.__encendida = False
         print("La aspiradora está apagada.")
 
     def __str__(self):
-        capacidad_restante = self.capacidad_polvo - self.polvo_recogido
-        estado = "encendida" if self.encendida else "apagada"
-        return (f"AspiradoraRobot(estado={estado}, polvo_recogido={self.polvo_recogido}g, "
+        capacidad_restante = self.__capacidad_polvo - self.__polvo_recogido
+        estado = "encendida" if self.__encendida else "apagada"
+        return (f"AspiradoraRobot(estado={estado}, polvo_recogido={self.__polvo_recogido}g, "
                 f"capacidad_restante={capacidad_restante}g)")
 
 def mostrar_menu():
@@ -59,4 +71,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
